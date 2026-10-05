@@ -10,22 +10,10 @@
   "theme_color": "#7a5fc8",
   "icons": [
     {
-      "src": "icon.png",
-      "sizes": "192x192",
+      "src": "icon-huit.png",
+      "sizes": "1199x1199",
       "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
   ]
 }
