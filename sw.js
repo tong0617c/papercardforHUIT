@@ -1,9 +1,11 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-chat-pages-1-huit-icon-1';
+var CACHE_NAME = 'mind-v2-home-rose-1';
 var URLS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
+  './home-theme.css',
+  './home-theme.js',
   './script.js',
   './icon-huit.png',
   './manifest.json'

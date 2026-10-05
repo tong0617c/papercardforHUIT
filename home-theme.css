@@ -1,0 +1,45 @@
+/* Home only: keep the original 4-column slot geometry for widgets and dragging. */
+#pageHome {
+  --home-ink:#744b57; --home-soft:#916775;
+  padding:18px 8px 14px;
+  background:
+    radial-gradient(ellipse at 5% 12%,#fff9 0,transparent 45%),
+    radial-gradient(ellipse at 90% 60%,#fff8 0,transparent 40%),
+    radial-gradient(circle at 18% 32%,#fff 0 1px,transparent 2px) 0 0/29px 37px,
+    linear-gradient(155deg,#f9e9ee,#efd0d9 48%,#fbf4f5);
+  color:var(--home-ink);
+  background-attachment:local;
+}
+.home-welcome {margin:0 10px; text-align:center;}
+.home-love-card {
+  position:relative;overflow:hidden;padding:23px 18px 22px;border-radius:28px;
+  border:1px solid #ffffffd9;
+  background:radial-gradient(ellipse at 50% 0%,#ecc1d480,transparent 65%),linear-gradient(180deg,#fff7,#fffc);
+  box-shadow:0 12px 32px #9c5c7210;
+}
+.home-love-card::before,.home-love-card::after {position:absolute;color:#fff;pointer-events:none;font-size:34px;content:'✧';top:28px;left:24px;}
+.home-love-card::after {top:85px;left:auto;right:25px;font-size:24px;}
+.home-card-label {font-size:11px;letter-spacing:4px;color:#916775;margin-bottom:18px;}
+.home-pair {display:flex;justify-content:center;padding-left:12px;margin-bottom:16px;}
+.home-avatar {width:66px;height:66px;border-radius:50%;border:4px solid #fff;display:grid;place-items:center;overflow:hidden;margin-left:-12px;background:#efdce5;color:#86546b;box-shadow:0 5px 16px #98637726;text-decoration:none;padding:0;cursor:pointer;}
+.home-avatar:last-child {background:#f5e6d9;color:#947457;}
+.home-avatar img {width:100%;height:100%;object-fit:cover;}
+.home-avatar svg {width:26px;height:26px;}
+.home-love-card h1 {font-family:Georgia,'Songti SC','SimSun',serif;font-weight:500;font-size:24px;line-height:1.4;margin:0 0 8px;overflow-wrap:anywhere;}
+.home-love-card p {font-size:13px;line-height:1.6;margin:0;color:#916775;}
+.home-clock {position:relative;padding:24px 0 2px;}
+.home-clock::before {content:'✦';position:absolute;left:25px;top:36px;font-size:30px;color:#fff;transform:rotate(-12deg);}
+.home-clock::after {content:'✧';position:absolute;right:27px;top:61px;font-size:23px;color:#fff;}
+.home-clock time {font:48px/1.15 Georgia,serif;letter-spacing:2px;font-variant-numeric:tabular-nums;}
+.home-clock-date {margin-top:7px;font-size:13px;letter-spacing:2px;color:#916775;}
+#pageHome .app-icon-img {background:#fff9;color:#875e69;border:1px solid #fff9;box-shadow:0 5px 13px #a7758610;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:20px;}
+#pageHome .app-icon-img svg {width:25px;height:25px;}
+#pageHome .app-icon-text {color:#744b57;font-size:12px;}
+#pageHome #homePager {padding:4px 0 16px!important;}
+.home-dock {position:sticky;bottom:0;z-index:15;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0 8px;padding:10px 4px;border:1px solid #fff;border-radius:25px;background:#fff3f6f5;box-shadow:0 8px 25px #80556218;}
+.home-dock button {border:0;background:transparent;color:#805462;font:12px/1.4 inherit;display:flex;flex-direction:column;align-items:center;gap:7px;padding:7px 0;border-radius:17px;cursor:pointer;font-family:inherit;font-size:12px;}
+.home-dock button:first-child {background:#efdfe9;color:#855b75;}
+.home-dock svg {width:22px;height:22px;}
+#pageHome button:focus-visible {outline:2px solid #875e69;outline-offset:3px;}
+@media(max-width:430px){.phone{height:100dvh;}}
+@media(prefers-reduced-motion:reduce){#pageHome *{scroll-behavior:auto!important;transition:none!important;}}

@@ -242,7 +242,7 @@ function renderAppIcons() {
         imgDiv.style.background = 'transparent';
         imgDiv.style.border = 'none';
       } else {
-        imgDiv.textContent = item.emoji;
+        imgDiv.innerHTML = homeIconMarkup(item.key);
       }
 
       var textDiv = document.createElement('div');
@@ -262,6 +262,7 @@ function renderAppIcons() {
 
   var mainContent = document.getElementById('pageHome');
   mainContent.innerHTML = '';
+  mainContent.appendChild(createHomeWelcome());
   mainContent.appendChild(container);
 
   if (oldScrollLeft > 0) {
@@ -348,6 +349,8 @@ function renderAppIcons() {
     document.querySelectorAll('.home-widget').forEach(function(el) { el.classList.add('editing'); });
   }
 
+  mainContent.appendChild(createHomeDock());
+  updateHomeWelcome();
   updateAppIconBadges();
 }
 
@@ -553,6 +556,7 @@ function updateTime() {
   const h = String(now.getHours()).padStart(2,'0');
   const m = String(now.getMinutes()).padStart(2,'0');
   document.getElementById('statusTime').textContent = h + ':' + m;
+  updateHomeClock(now);
 }
 
 // ===== NAVIGATION =====
@@ -563,6 +567,7 @@ function navigateTo(pageId) {
   // 2. 如果是主页，直接显示，结束
   if (pageId === 'pageHome') {
     document.querySelector('.main-content').style.display = 'block';
+    updateHomeWelcome();
     try { updateAppIconBadges(); } catch(e) {}
     return;
   }
