@@ -77,6 +77,7 @@ let state = {
   lastAvatarScan: 0,
   dreamRecall: { records: [] },
   dreamRecallDone: {},
+  mochiTrace: {},
 };
 
 // ===== 图标配置 =====
@@ -101,6 +102,7 @@ const ICONS_CONFIG = [
   { key: 'pageMemoList', name: '备忘录', emoji: '📝', color: 'icon-orange' },
   { key: 'pageAvatar', name: '头像', emoji: '🖼️', color: 'icon-pink' },
   { key: 'pageWidgets', name: '小组件', emoji: '🧩', color: 'icon-purple' },
+  { key: 'pageMochiTrace', name: '寻踪', emoji: '📍', color: 'icon-purple' },
 ];
 
 // ===== 1. 渲染主页图标 =====
@@ -351,6 +353,7 @@ function renderAppIcons() {
 
   mainContent.appendChild(createHomeDock());
   updateHomeWelcome();
+  MindTrace.boot();
   updateAppIconBadges();
 }
 
@@ -527,6 +530,7 @@ function loadState() {
             if (parsed.lastAvatarScan) state.lastAvatarScan = parsed.lastAvatarScan;
             if (parsed.dreamRecall) state.dreamRecall = parsed.dreamRecall;
             if (parsed.dreamRecallDone) state.dreamRecallDone = parsed.dreamRecallDone;
+            if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
           } catch(err) {}
         }
         resolve();
@@ -545,6 +549,7 @@ function loadState() {
         if (parsed.dream) state.dream = parsed.dream;
         if (parsed.dreams) state.dreams = parsed.dreams;
         // ... (为了简洁，这里用同样的方式把剩下的字段读一遍) ...
+        if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
       } catch(e) {}
     }
   });
@@ -561,6 +566,7 @@ function updateTime() {
 
 // ===== NAVIGATION =====
 function navigateTo(pageId) {
+  if (pageId === 'pageMochiTrace') { MindTrace.open(); return; }
   // 1. 先隐藏所有页面
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   
@@ -1266,6 +1272,7 @@ function restoreData(e) {
     try {
       var data = JSON.parse(ev.target.result);
       // 恢复 state
+      MindTrace.reset();
       if (data.state) {
         Object.assign(state, data.state);
         if (data.chatMessages) chatMessages = data.chatMessages;
@@ -2238,6 +2245,7 @@ if (Math.random() < 1) otherMembers.push('user');
 }
 
 function renderChat() {
+  MindTrace.syncChatButton();
   var chatBody = document.getElementById('chatBody');
   var isGroup = state.currentChatId && state.currentChatId.startsWith('group_');
   var bg = null;
@@ -3313,6 +3321,7 @@ function renderChatList() {
 
 // ===== 打开指定梦角的聊天窗口 =====
 function openChat(id) {
+    MindTrace.ensure(id, false);
     if (!state.lastReadAt) state.lastReadAt = {};
   state.lastReadAt[id] = Date.now();
   saveState();

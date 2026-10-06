@@ -1,11 +1,22 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-home-rose-1';
+var CACHE_NAME = 'mind-v2-mochi-trace-1';
 var URLS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './home-theme.css',
   './home-theme.js',
+  './trace-host.js',
+  './trace-host.css',
+  './trace.html',
+  './trace-core.js',
+  './trace-support.js',
+  './trace-loc-lib.js',
+  './trace-adapter.js',
+  './trace-adapter.css',
+  './trace-mochi.css',
+  './trace-start.js',
+  './trace-notice.html',
   './script.js',
   './icon-huit.png',
   './manifest.json'
@@ -40,7 +51,7 @@ self.addEventListener('fetch', function(e) {
   if (url.origin !== location.origin) return;
 
   e.respondWith(
-    caches.match(e.request).then(function(cached) {
+    caches.match(e.request, { ignoreSearch: url.pathname.endsWith('/trace.html') }).then(function(cached) {
       var fetchPromise = fetch(e.request).then(function(response) {
         if (response && response.status === 200 && response.type === 'basic') {
           var clone = response.clone();

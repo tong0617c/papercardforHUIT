@@ -1,0 +1,170 @@
+<!doctype html><html lang="zh-CN" class="force-mobile"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>寻踪 · Mochi</title><link rel="stylesheet" href="trace-mochi.css"><link rel="stylesheet" href="trace-adapter.css"></head><body><div class="phone"><div class="page" id="page-checkin" hidden>
+      <div class="chat-head">
+        <span class="ch-back" id="checkin-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </span>
+        <span class="ch-name">寻踪</span>
+      </div>
+      <div class="cal-scroll"><label class="trace-contact">梦角 <select id="trace-contact"></select></label>
+        <div class="cal-card glass" id="ck-card">
+          <div class="ck-top">
+            <span class="ck-status" id="ck-status">正在寻踪...</span>
+            <button class="ck-refresh" id="ck-refresh">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-2.6-6.4M21 3v5h-5"/></svg>
+              刷新
+            </button>
+          </div>
+          <div class="ck-location">
+            <span class="ck-label">TA 在哪里</span>
+            <div class="ck-value" id="ck-place">—</div>
+          </div>
+          <div class="ck-location">
+            <span class="ck-label">TA 在做什么</span>
+            <div class="ck-value" id="ck-action">—</div>
+          </div>
+          <div class="ck-location">
+            <span class="ck-label">TA 想对你说</span>
+            <div class="ck-value" id="ck-msg">—</div>
+          </div>
+          
+          <button class="ck-loc-entry" id="ck-loc-entry-desk"><span class="ck-loc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-5.4 6.5-10.5a6.5 6.5 0 10-13 0C5.5 15.6 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.4"/></svg></span><span class="ck-loc-main"><span class="ck-loc-t">TA在身边 · 位置感知</span><span class="ck-loc-s">方位感知·位置时间线·换位开关</span></span><span class="ck-loc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span></button>
+        </div>
+        <div class="cal-card glass">
+          <div class="cal-card-title">寻踪记录</div>
+          <div id="ck-history">
+            <div class="div-result-empty">暂无寻踪记录</div>
+          </div>
+        </div>
+      <div class="trace-tools"><button id="li-checkin-cards">寻踪日常字卡</button><button id="li-checkin-cards-mine">我的添加</button><button id="li-loc-cards">位置字卡库</button></div><div class="trace-credit">寻踪功能来源：Mochi 字卡<br>小红书 @言序（1842523578）<br>基于言序作品修改 · 非商用<br><a href="https://ling233330-star.github.io/mochi/" target="_blank" rel="noopener">原作</a> · <button id="trace-notice">原作公告与许可</button></div></div>
+    </div><div class="page" id="page-checkin-cards" hidden>
+  <div class="chat-head">
+    <span class="ch-back" id="checkin-cards-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </span>
+    <span class="ch-name">寻踪日常字卡</span>
+  </div>
+  <div class="gs-scroll">
+    <div class="set-group glass">
+      <div class="gs-row"><span>使用系统预设字卡</span><label class="toggle"><input type="checkbox" id="ck-default" checked><span class="tk"></span></label></div>
+    </div>
+    
+    <div class="set-group glass" id="ck-prob-box" style="margin:10px 12px 0">
+      <div class="gs-row"><span>寻踪日常发送到聊天</span><div class="stepper" id="dcf-prob-checkin-ck" data-dcfkey="checkin" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-checkin-ck-val" readonly><button class="stp-max">+</button></div></div>
+    </div>
+    <div class="sm-set-hint" id="ck-prob-hint" style="padding:2px 16px 4px">说明：本概率控制「TA 更新日常时是否往聊天里推消息」（更新提示 + 日常内容 + 概率「提醒你来寻踪」），与「其他互动功能字卡」页的同一项设置共用一个值，改任意一处两处同步。调到 0% 时寻踪页与历史记录照常生成，只是不再在聊天里推送。</div>
+    <div class="fav-tabs">
+      <button class="fav-tab sel" data-cktab="place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 21s-6-5.3-6-10a6 6 0 1112 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>地点</button>
+      <button class="fav-tab" data-cktab="action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M13 2L4.5 13.5H11l-1 8.5L18.5 10H12l1-8z"/></svg>在做什么</button>
+      <button class="fav-tab" data-cktab="msg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>说的话</button>
+    </div>
+    <div class="card-tabs" id="ck-tabs" style="padding:6px 12px 8px">
+      <button class="cc-tab sel" data-tab="sys">系统预设</button>
+      <button class="cc-tab" data-tab="mine">我的添加</button>
+    </div>
+    <div id="ck-sys-panel">
+      <div class="set-group glass">
+        <div class="cal-card-title" style="padding:14px 14px 0" id="cck-sys-title">地点</div>
+        <div id="cck-sys-list" style="padding:8px 14px 14px"></div>
+      </div>
+    </div>
+    <div id="ck-mine-panel" hidden>
+      <div class="set-group glass">
+        <div class="cal-card-title" style="padding:14px 14px 0;display:flex;align-items:center;justify-content:space-between"><span>批量输入字卡</span><button class="cc-tool" id="ck-new-grp" style="padding:4px 8px;font-size:11px">＋ 分组</button></div>
+        <div class="tc-addform">
+          <select id="cck-batch-grp" class="tc-input"></select>
+          <textarea id="cck-batch" class="tc-input" rows="6" placeholder="每行一个，如：&#10;在家&#10;在公司&#10;在咖啡店"></textarea>
+          <button class="ta-add-btn" style="width:100%" id="cck-batch-add">添加到当前分类</button>
+        </div>
+      </div>
+      <div class="set-group glass">
+        <div class="cal-card-title" style="padding:14px 14px 0" id="cck-mine-title">地点</div>
+        <div id="cck-mine-list" style="padding:8px 14px 14px"></div>
+      </div>
+    </div>
+    <div class="cal-card-title" style="padding:0 2px">寻踪时 TA 会随机从这三组字卡里各抽一条展示</div>
+  </div>
+</div><div class="page" id="page-loc-cards" hidden>
+  <div class="chat-head">
+    <span class="ch-back" id="loc-cards-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </span>
+    <span class="ch-name">TA在身边位置卡</span>
+  </div>
+  <div class="gs-scroll">
+    <div class="set-group glass">
+      <div class="gs-row"><span>使用系统预设位置卡</span><label class="toggle"><input type="checkbox" id="loc-default" checked><span class="tk"></span></label></div>
+    </div>
+    <div class="cal-card-title" style="padding:0 14px 2px">TA 想告诉你的位置（发送字卡）</div>
+    <div class="fav-tabs">
+      <button class="fav-tab sel" data-loctab="dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 21s-6-5.3-6-10a6 6 0 1112 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>方位</button>
+      <button class="fav-tab" data-loctab="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><circle cx="12" cy="12" r="9"/><path d="M12 12l3-3"/></svg>距离</button>
+      <button class="fav-tab" data-loctab="state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M13 2L4.5 13.5H11l-1 8.5L18.5 10H12l1-8z"/></svg>状态</button>
+      <button class="fav-tab" data-loctab="sense"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>感知</button>
+      <button class="fav-tab" data-loctab="egg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 3c4 5 6 8 6 11a6 6 0 11-12 0c0-3 2-6 6-11z"/></svg>彩蛋</button>
+    </div>
+    <div class="cal-card-title" style="padding:8px 14px 2px">你的感知（方位感知 · 不是精确定位）</div>
+    <div class="fav-tabs">
+      <button class="fav-tab" data-loctab="direct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 3l3.5 3.5L12 10l-3.5-3.5z"/><path d="M12 3v18M12 10v11"/></svg>方向</button>
+      <button class="fav-tab" data-loctab="rangef"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>距离感</button>
+      <button class="fav-tab" data-loctab="power"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="2.5"/></svg>感知强度</button>
+      <button class="fav-tab" data-loctab="touch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M8 14.5V7.2a1.5 1.5 0 0 1 3 0v7.3"/><path d="M11 14.5V6.5a1.5 1.5 0 0 1 3 0v8"/><path d="M14 14.5V7.8a1.5 1.5 0 0 1 3 0v6.7"/><path d="M6.5 14.5h12c0 3.5-2.7 6-6 6s-6-2.5-6-6"/><path d="M6 5a8.5 8.5 0 0 1 12 0"/></svg>触碰</button>
+    </div>
+    <div class="card-tabs" id="loc-tabs" style="padding:6px 12px 8px">
+      <button class="cc-tab sel" data-tab="sys">系统预设</button>
+      <button class="cc-tab" data-tab="mine">我的添加</button>
+    </div>
+    <div class="set-group glass" id="loc-sys-panel">
+      <div class="cal-card-title" style="padding:14px 14px 0" id="cloc-sys-title">方位</div>
+      <div id="cloc-sys-list" style="padding:8px 14px 14px"></div>
+    </div>
+    <div class="set-group glass" id="loc-mine-panel" hidden>
+      <div class="cal-card-title" style="padding:14px 14px 0;display:flex;align-items:center;justify-content:space-between"><span>批量输入位置卡</span><button class="cc-tool" id="loc-new-grp" style="padding:4px 8px;font-size:11px">＋ 分组</button></div>
+      <div class="tc-addform">
+        <select id="cloc-batch-grp" class="tc-input"></select>
+        <textarea id="cloc-batch" class="tc-input" rows="6" placeholder="每行一个，如：&#10;在咖啡店等你&#10;在回家的路上&#10;在你看不到的地方"></textarea>
+        <button class="ta-add-btn" style="width:100%" id="cloc-batch-add">添加到我的位置卡</button>
+      </div>
+      <div class="cal-card-title" style="padding:14px 14px 0" id="cloc-mine-title">我的位置卡</div>
+      <div id="cloc-mine-list" style="padding:8px 14px 14px"></div>
+    </div>
+    <div class="cal-card-title" style="padding:0 2px">TA 想告诉你 TA 在哪时，会从上面的发送字卡里选（发出后有光点动效）；方位感知用的是下面的感知字卡</div>
+    <div class="cal-card-title" style="padding:4px 2px 0">光点落在哪儿＝TA 在哪儿：方位卡（在你左边 / 右边 / 身后 / 前面）落在画面对应方向；距离卡与状态卡跟着<b>最近一张方位卡</b>的方位走——「再近一点」朝屏幕中心靠近，「再远一点」朝屏幕边缘再退开。所以上一张说的是「在你右边」，接着发「再远一点」时，光点会出现在屏幕右侧靠边处，这是正常的（不是跑偏）。</div>
+  </div>
+</div><div class="poke-card" id="ck-panel" hidden>
+        <div class="poke-card-head">
+          <span>寻踪 · <b id="ck-panel-name">TA</b> 的日常</span>
+          <button class="poke-card-close" id="ck-panel-close">✕</button>
+        </div>
+        <div class="poke-card-scroll" id="ck-panel-body">
+          <div class="ck-location"><span class="ck-label">TA 在哪里</span><div class="ck-value" id="ck-p-place">—</div></div>
+          <div class="ck-location"><span class="ck-label">TA 在做什么</span><div class="ck-value" id="ck-p-action">—</div></div>
+          <div class="ck-location"><span class="ck-label">TA 想对你说</span><div class="ck-value" id="ck-p-msg">—</div></div>
+          <div class="ck-updated" id="ck-p-updated"></div>
+          
+          <button class="ck-loc-entry" id="ck-loc-entry"><span class="ck-loc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-5.4 6.5-10.5a6.5 6.5 0 10-13 0C5.5 15.6 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.4"/></svg></span><span class="ck-loc-main"><span class="ck-loc-t">TA在身边 · 位置感知</span><span class="ck-loc-s">方位感知·位置时间线·换位开关</span></span><span class="ck-loc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span></button>
+        </div>
+      </div><div class="loc-panel" id="loc-panel" hidden>
+      <div class="loc-head">
+        <button class="loc-back" id="loc-back" aria-label="返回">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <span class="loc-title">TA在身边 · <b id="loc-name">TA</b> 的位置</span>
+      </div>
+      <div class="loc-scroll">
+        
+        <div class="fw-sense" id="fw-sense">
+          <div class="fw-title">
+            <span class="fw-title-t">方位感知</span>
+            <span class="fw-title-s">不是精确定位 · 是你对 TA 的模糊感觉</span>
+          </div>
+          <div class="fw-circle" id="fw-circle"></div>
+          <div class="fw-detail" id="fw-detail"></div>
+          <button class="fw-perceive" id="fw-perceive" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+            感知一下
+          </button>
+          <div class="fw-result" id="fw-result" hidden></div>
+        </div>
+        <div class="loc-body" id="loc-body"></div>
+      </div>
+    </div><div class="loc-fx" id="loc-fx" hidden></div></div><dialog id="trace-modal"><form method="dialog"><h3></h3><p></p><input><div class="trace-pills"></div><footer><button value="cancel">取消</button><button value="ok">确定</button></footer></form></dialog><script src="trace-adapter.js"></script><script src="trace-support.js"></script><script src="trace-loc-lib.js"></script><script src="trace-core.js"></script><script src="trace-start.js"></script></body></html>

@@ -14,6 +14,7 @@
   <link rel="apple-touch-icon" href="icon-huit.png">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="home-theme.css">
+  <link rel="stylesheet" href="trace-host.css">
 <style id="userCustomStyle"></style>
 <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
 </head>
@@ -132,6 +133,7 @@
   <div class="page-header">
     <button class="back-btn" onclick="navigateTo('pageChatList')">‹</button>
     <h2 id="chatHeaderName">˗ˋˏ♡ˎˊ˗</h2>
+    <button id="chatTraceButton" aria-label="寻踪" onclick="MindTrace.half()" style="display:none;width:32px;height:32px;align-items:center;justify-content:center;border:0;background:transparent;color:var(--gray);font-size:20px;cursor:pointer;">⌖</button>
     <button onclick="openChatSettings()" style="width:32px;height:32px;border:none;background:transparent;font-size:20px;cursor:pointer;color:var(--gray);display:flex;align-items:center;justify-content:center;">⋮</button>
   </div>
   
@@ -1503,6 +1505,7 @@
 </div>
 
 <script src="home-theme.js"></script>
+<script src="trace-host.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

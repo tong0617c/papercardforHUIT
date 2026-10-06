@@ -1,0 +1,24 @@
+const traceCid=new URLSearchParams(location.search).get('contact');
+const traceHost=window.parent.MindTrace;
+if(!traceHost)throw new Error('请从 Mind 主页的寻踪入口打开');
+window.__mochiDataReady=true;
+window.activePrefix=()=> 'mind-trace:'+traceCid;
+window.activeStore=()=>({get:key=>traceHost.get(traceCid,key),set:(key,v)=>traceHost.set(traceCid,key,v)});
+window.toast=function(text){let el=document.getElementById('cc-toast');if(!el){el=document.createElement('div');el.id='cc-toast';document.body.appendChild(el);}el.textContent=text;el.className='cc-toast show';clearTimeout(el._t);el._t=setTimeout(()=>el.className='cc-toast',2200);};
+window.chatAddIn=text=>traceHost.add(traceCid,text,'dream');
+window.chatAddSystem=text=>traceHost.add(traceCid,text,'system');
+window.chatSendMsg=text=>traceHost.add(traceCid,text,'user');
+window.dcfGet=()=>Number(traceHost.get(traceCid,'checkin-prob')??100);
+window.taFit=text=>String(text).replace(/TA/g,traceHost.get(traceCid,'lbl-partner'));
+window.openModal=function(title,value,callback,opts){
+  opts=opts||{};const modal=document.getElementById('trace-modal');
+  if(modal.open)modal.close();
+  modal.querySelector('h3').textContent=title;
+  modal.querySelector('p').textContent=opts.staticText||'';
+  const input=modal.querySelector('input');input.value=value||'';input.hidden=!!opts.noInput;
+  const pills=modal.querySelector('.trace-pills');pills.innerHTML='';let picked=opts.pill??null;
+  (opts.pills||[]).forEach(p=>{const b=document.createElement('button');b.type='button';b.textContent=p.label;b.classList.toggle('on',p.value===picked);b.onclick=()=>{picked=p.value;pills.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');};pills.appendChild(b);});
+  modal.returnValue='cancel';
+  modal.onclose=()=>{if(modal.returnValue==='ok')callback(opts.pills?picked:opts.noInput?'ok':input.value);};
+  modal.showModal();
+};
