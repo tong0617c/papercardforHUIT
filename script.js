@@ -78,6 +78,7 @@ let state = {
   dreamRecall: { records: [] },
   dreamRecallDone: {},
   mochiTrace: {},
+  tarotHistory: [],
 };
 
 // ===== 图标配置 =====
@@ -103,6 +104,7 @@ const ICONS_CONFIG = [
   { key: 'pageAvatar', name: '头像', emoji: '🖼️', color: 'icon-pink' },
   { key: 'pageWidgets', name: '小组件', emoji: '🧩', color: 'icon-purple' },
   { key: 'pageMochiTrace', name: '寻踪', emoji: '📍', color: 'icon-purple' },
+  { key: 'pageTarot', name: '塔罗传讯', emoji: '✧', color: 'icon-purple' },
 ];
 
 // ===== 1. 渲染主页图标 =====
@@ -531,6 +533,7 @@ function loadState() {
             if (parsed.dreamRecall) state.dreamRecall = parsed.dreamRecall;
             if (parsed.dreamRecallDone) state.dreamRecallDone = parsed.dreamRecallDone;
             if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
+            if (Array.isArray(parsed.tarotHistory)) state.tarotHistory = parsed.tarotHistory;
           } catch(err) {}
         }
         resolve();
@@ -550,6 +553,7 @@ function loadState() {
         if (parsed.dreams) state.dreams = parsed.dreams;
         // ... (为了简洁，这里用同样的方式把剩下的字段读一遍) ...
         if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
+        if (Array.isArray(parsed.tarotHistory)) state.tarotHistory = parsed.tarotHistory;
       } catch(e) {}
     }
   });
@@ -567,6 +571,7 @@ function updateTime() {
 // ===== NAVIGATION =====
 function navigateTo(pageId) {
   if (pageId === 'pageMochiTrace') { MindTrace.open(); return; }
+  if (pageId === 'pageTarot') MindTarot.prepare();
   // 1. 先隐藏所有页面
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   

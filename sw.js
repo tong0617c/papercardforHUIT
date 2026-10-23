@@ -1,11 +1,13 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-mochi-trace-1';
+var CACHE_NAME = 'mind-v2-tarot-1';
 var URLS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './home-theme.css',
   './home-theme.js',
+  './tarot.js',
+  './tarot.css',
   './trace-host.js',
   './trace-host.css',
   './trace.html',
