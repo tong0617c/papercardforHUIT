@@ -1,5 +1,5 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-tarot-1';
+var CACHE_NAME = 'mind-v2-tarot-78-1';
 var URLS_TO_CACHE = [
   './',
   './index.html',
