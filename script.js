@@ -7883,6 +7883,12 @@ var WORK_SCENES = [
     name: '便利店晚班',
     hourlyWage: 15,
     shifts: [[18, 23]]
+  },
+  {
+    id: 'protection_fee',
+    name: '收保护费',
+    hourlyWage: 25,
+    shifts: [[18, 23]]
   }
 ];
 
