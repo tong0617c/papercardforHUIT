@@ -1,0 +1,782 @@
+[
+  {
+    "id": 0,
+    "name": "The Fool",
+    "file": "tarot-images/card-00.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Fool_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/The_Fool_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Fool_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 1,
+    "name": "The Magician",
+    "file": "tarot-images/card-01.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Magician_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/The_Magician_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Magician_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 2,
+    "name": "The High Priestess",
+    "file": "tarot-images/card-02.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_High_Priestess_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/The_High_Priestess_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_High_Priestess_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 3,
+    "name": "The Empress",
+    "file": "tarot-images/card-03.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Empress_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/The_Empress_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Empress_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 4,
+    "name": "The Emperor",
+    "file": "tarot-images/card-04.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Emperor_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/The_Emperor_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Emperor_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 5,
+    "name": "The Hierophant",
+    "file": "tarot-images/card-05.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Hierophant_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/The_Hierophant_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Hierophant_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 6,
+    "name": "The Lovers",
+    "file": "tarot-images/card-06.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Lovers_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/The_Lovers_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Lovers_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 7,
+    "name": "The Chariot",
+    "file": "tarot-images/card-07.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Chariot_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/The_Chariot_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Chariot_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 8,
+    "name": "Strength",
+    "file": "tarot-images/card-08.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Strength_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Strength_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Strength_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 9,
+    "name": "The Hermit",
+    "file": "tarot-images/card-09.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Hermit_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/The_Hermit_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Hermit_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 10,
+    "name": "Wheel of Fortune",
+    "file": "tarot-images/card-10.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Wheel_of_Fortune_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Wheel_of_Fortune_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Wheel_of_Fortune_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 11,
+    "name": "Justice",
+    "file": "tarot-images/card-11.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Justice_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Justice_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Justice_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 12,
+    "name": "The Hanged Man",
+    "file": "tarot-images/card-12.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Hanged_Man_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/The_Hanged_Man_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Hanged_Man_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 13,
+    "name": "Death",
+    "file": "tarot-images/card-13.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Death_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Death_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Death_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 14,
+    "name": "Temperance",
+    "file": "tarot-images/card-14.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Temperance_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Temperance_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Temperance_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 15,
+    "name": "The Devil",
+    "file": "tarot-images/card-15.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Devil_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/The_Devil_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Devil_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 16,
+    "name": "The Tower",
+    "file": "tarot-images/card-16.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Tower_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/The_Tower_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Tower_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 17,
+    "name": "The Star",
+    "file": "tarot-images/card-17.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Star_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/The_Star_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Star_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 18,
+    "name": "The Moon",
+    "file": "tarot-images/card-18.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Moon_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/The_Moon_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Moon_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 19,
+    "name": "The Sun",
+    "file": "tarot-images/card-19.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Sun_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/The_Sun_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_Sun_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 20,
+    "name": "Judgement",
+    "file": "tarot-images/card-20.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Judgement_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Judgement_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Judgement_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 21,
+    "name": "The World",
+    "file": "tarot-images/card-21.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:The_World_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/The_World_%28Rider-Waite_Smith_tarot_deck%29.png/330px-The_World_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 22,
+    "name": "Ace of Wands",
+    "file": "tarot-images/card-22.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ace_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Ace_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Ace_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 23,
+    "name": "Two of Wands",
+    "file": "tarot-images/card-23.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Two_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Two_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Two_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 24,
+    "name": "Three of Wands",
+    "file": "tarot-images/card-24.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Three_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Three_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Three_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 25,
+    "name": "Four of Wands",
+    "file": "tarot-images/card-25.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Four_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Four_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Four_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 26,
+    "name": "Five of Wands",
+    "file": "tarot-images/card-26.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Five_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Five_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Five_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 27,
+    "name": "Six of Wands",
+    "file": "tarot-images/card-27.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Six_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Six_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Six_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 28,
+    "name": "Seven of Wands",
+    "file": "tarot-images/card-28.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Seven_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Seven_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Seven_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 29,
+    "name": "Eight of Wands",
+    "file": "tarot-images/card-29.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Eight_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Eight_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Eight_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 30,
+    "name": "Nine of Wands",
+    "file": "tarot-images/card-30.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Nine_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Nine_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Nine_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 31,
+    "name": "Ten of Wands",
+    "file": "tarot-images/card-31.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ten_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Ten_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Ten_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 32,
+    "name": "Page of Wands",
+    "file": "tarot-images/card-32.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Page_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Page_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Page_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 33,
+    "name": "Knight of Wands",
+    "file": "tarot-images/card-33.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Knight_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Knight_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Knight_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 34,
+    "name": "Queen of Wands",
+    "file": "tarot-images/card-34.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Queen_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Queen_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Queen_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 35,
+    "name": "King of Wands",
+    "file": "tarot-images/card-35.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:King_of_Wands_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/King_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png/330px-King_of_Wands_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 36,
+    "name": "Ace of Cups",
+    "file": "tarot-images/card-36.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ace_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Ace_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Ace_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 37,
+    "name": "Two of Cups",
+    "file": "tarot-images/card-37.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Two_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Two_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Two_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 38,
+    "name": "Three of Cups",
+    "file": "tarot-images/card-38.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Three_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Three_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Three_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 39,
+    "name": "Four of Cups",
+    "file": "tarot-images/card-39.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Four_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Four_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Four_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 40,
+    "name": "Five of Cups",
+    "file": "tarot-images/card-40.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Five_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Five_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Five_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 41,
+    "name": "Six of Cups",
+    "file": "tarot-images/card-41.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Six_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Six_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Six_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 42,
+    "name": "Seven of Cups",
+    "file": "tarot-images/card-42.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Seven_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Seven_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Seven_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 43,
+    "name": "Eight of Cups",
+    "file": "tarot-images/card-43.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Eight_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Eight_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Eight_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 44,
+    "name": "Nine of Cups",
+    "file": "tarot-images/card-44.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Nine_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Nine_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Nine_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 45,
+    "name": "Ten of Cups",
+    "file": "tarot-images/card-45.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ten_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Ten_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Ten_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 46,
+    "name": "Page of Cups",
+    "file": "tarot-images/card-46.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Page_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Page_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Page_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 47,
+    "name": "Knight of Cups",
+    "file": "tarot-images/card-47.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Knight_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Knight_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Knight_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 48,
+    "name": "Queen of Cups",
+    "file": "tarot-images/card-48.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Queen_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Queen_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Queen_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 49,
+    "name": "King of Cups",
+    "file": "tarot-images/card-49.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:King_of_Cups_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/King_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png/330px-King_of_Cups_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 50,
+    "name": "One of Swords",
+    "file": "tarot-images/card-50.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:One_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/One_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-One_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 51,
+    "name": "Two of Swords",
+    "file": "tarot-images/card-51.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Two_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Two_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Two_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 52,
+    "name": "Three of Swords",
+    "file": "tarot-images/card-52.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Three_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Three_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Three_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 53,
+    "name": "Four of Swords",
+    "file": "tarot-images/card-53.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Four_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Four_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Four_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 54,
+    "name": "Five of Swords",
+    "file": "tarot-images/card-54.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Five_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Five_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Five_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 55,
+    "name": "Six of Swords",
+    "file": "tarot-images/card-55.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Six_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Six_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Six_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 56,
+    "name": "Seven of Swords",
+    "file": "tarot-images/card-56.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Seven_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Seven_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Seven_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 57,
+    "name": "Eight of Swords",
+    "file": "tarot-images/card-57.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Eight_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Eight_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Eight_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 58,
+    "name": "Nine of Swords",
+    "file": "tarot-images/card-58.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Nine_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Nine_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Nine_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 59,
+    "name": "Ten of Swords",
+    "file": "tarot-images/card-59.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ten_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Ten_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Ten_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 60,
+    "name": "Page of Swords",
+    "file": "tarot-images/card-60.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Page_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Page_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Page_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 61,
+    "name": "Knight of Swords",
+    "file": "tarot-images/card-61.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Knight_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Knight_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Knight_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 62,
+    "name": "Queen of Swords",
+    "file": "tarot-images/card-62.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Queen_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Queen_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Queen_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 63,
+    "name": "King of Swords",
+    "file": "tarot-images/card-63.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:King_of_Swords_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/King_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png/330px-King_of_Swords_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 64,
+    "name": "One of Pentacles",
+    "file": "tarot-images/card-64.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:One_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/One_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-One_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 65,
+    "name": "Two of Pentacles",
+    "file": "tarot-images/card-65.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Two_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Two_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Two_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 66,
+    "name": "Three of Pentacles",
+    "file": "tarot-images/card-66.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Three_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Three_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Three_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 67,
+    "name": "Four of Pentacles",
+    "file": "tarot-images/card-67.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Four_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Four_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Four_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 68,
+    "name": "Five of Pentacles",
+    "file": "tarot-images/card-68.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Five_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Five_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Five_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 69,
+    "name": "Six of Pentacles",
+    "file": "tarot-images/card-69.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Six_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Six_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Six_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 70,
+    "name": "Seven of Pentacles",
+    "file": "tarot-images/card-70.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Seven_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Seven_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Seven_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 71,
+    "name": "Eight of Pentacles",
+    "file": "tarot-images/card-71.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Eight_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Eight_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Eight_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 72,
+    "name": "Nine of Pentacles",
+    "file": "tarot-images/card-72.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Nine_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Nine_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Nine_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 73,
+    "name": "Ten of Pentacles",
+    "file": "tarot-images/card-73.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Ten_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Ten_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Ten_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 74,
+    "name": "Page of Pentacles",
+    "file": "tarot-images/card-74.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Page_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Page_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Page_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 75,
+    "name": "Knight of Pentacles",
+    "file": "tarot-images/card-75.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Knight_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Knight_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Knight_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 76,
+    "name": "Queen of Pentacles",
+    "file": "tarot-images/card-76.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Queen_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Queen_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-Queen_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  },
+  {
+    "id": 77,
+    "name": "King of Pentacles",
+    "file": "tarot-images/card-77.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:King_of_Pentacles_(Rider-Waite_Smith_tarot_deck).png",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/King_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png/330px-King_of_Pentacles_%28Rider-Waite_Smith_tarot_deck%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "Public domain",
+    "artist": "Pamela Colman Smith",
+    "encoding": "Wikimedia 330px thumbnail, converted to WebP quality 86; no cropping or illustration changes."
+  }
+]
