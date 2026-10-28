@@ -95,9 +95,12 @@ window.MindTarot = (function () {
   const rankMarks=['ACE','II','III','IV','V','VI','VII','VIII','IX','X','PAGE','KNIGHT','QUEEN','KING'];
   minorSuits.forEach(([suit, meanings]) => meanings.forEach((meaning,i) => cards.push([suit+ranks[i],rankMarks[i],...meaning])));
   const roles=['想对你说','心里的牵挂','此刻的回应'];
-  let root, deck=[], picks=[], flipped=[], phase='idle', epoch=0, roundContext=null, saved=false;
+  let root, deck=[], picks=[], flipped=[], phase='idle', roundContext=null, saved=false, shuffleCount=0;
+  let shuffleDrag=null, rowDrag=null, suppressPickUntil=0;
   const $=id=>root.querySelector('#'+id);
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const art=id=>'tarot-images/card-'+String(id).padStart(2,'0')+'.webp';
+  const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
   function random(n){const a=new Uint32Array(1);crypto.getRandomValues(a);return Math.floor(a[0]/4294967296*n);}
   function history(){if(!Array.isArray(state.tarotHistory))state.tarotHistory=[];return state.tarotHistory;}
   function make(){
@@ -105,15 +108,23 @@ window.MindTarot = (function () {
     root.innerHTML=`<div class="tr-head"><button id="tr-back" aria-label="返回主页">‹</button><span>塔罗传讯</span><button id="tr-history" aria-label="查看传讯记录">记录</button></div>
       <div class="tr-scroll"><div class="tr-intro"><span class="tr-eyebrow">A LITTLE WHISPER</span><h1>把心事，交给这一刻</h1><p>静下来，想一想你想收到的话。</p></div>
       <div class="tr-form"><label>传讯对象<select id="tr-person"></select></label><label>此刻的心事 <span>选填</span><input id="tr-question" maxlength="120" placeholder="今天，你有什么想对我说的吗？"></label></div>
-      <div class="tr-stage"><div class="tr-orbit" aria-hidden="true"></div><div id="tr-deck" class="tr-deck" aria-label="待选的牌"></div><p id="tr-status" role="status" aria-live="polite">78 张完整牌组 · 随机正逆位</p><button id="tr-shuffle" class="tr-primary">洗牌，开始传讯</button></div>
+      <div class="tr-stage"><div id="tr-mixing"><div id="tr-shuffle-pad" aria-label="左右滑动洗牌，也可使用下方洗一次按钮"><div class="tr-orbit" aria-hidden="true"></div><div class="tr-mix-stack" aria-hidden="true">${Array.from({length:9},(_,i)=>`<span class="tr-mix-card" style="--i:${i-4}">✦</span>`).join('')}</div><span class="tr-gesture-hint">← 左右滑动，亲手洗牌 →</span></div><div class="tr-mix-actions"><button id="tr-shuffle" class="tr-secondary">洗一次</button><button id="tr-finish" class="tr-primary" disabled>洗好了，开始抽牌</button></div></div>
+      <div id="tr-spread" hidden><div class="tr-spread-heading"><span>78 张完整牌组</span><span id="tr-range"></span></div><div id="tr-deck" class="tr-deck" aria-label="78 张待选牌，左右滑动浏览"></div><div class="tr-row-controls"><button id="tr-prev" aria-label="向左浏览牌组">‹</button><span>左右滑动浏览 · 轻点选牌</span><button id="tr-next" aria-label="向右浏览牌组">›</button></div></div>
+      <p id="tr-status" role="status" aria-live="polite"></p></div>
       <div id="tr-slots" class="tr-slots"></div><div id="tr-reading" aria-live="polite"></div>
-      <button id="tr-again" class="tr-primary" hidden>再听一组心声</button><p class="tr-note">随机牌意与预设文案组成的虚构互动，仅供娱乐与自我表达。</p></div>
-      <dialog id="tr-dialog"><header><h2>传讯记录</h2><button id="tr-close" aria-label="关闭记录">×</button></header><div id="tr-history-list"></div><p>仅保留最近 30 次 · 随完整备份保存</p></dialog>`;
+      <button id="tr-again" class="tr-primary" hidden>再听一组心声</button><p class="tr-note">随机牌意与预设文案组成的虚构互动，仅供娱乐与自我表达。<br>牌图：Pamela Colman Smith · 经典韦特塔罗<br><a href="tarot-images/sources.json" target="_blank" rel="noopener">牌图来源 · Wikimedia Commons（公有领域）</a></p></div>
+      <dialog id="tr-dialog"><header><h2>传讯记录</h2><button id="tr-close" aria-label="关闭记录">×</button></header><div id="tr-history-list"></div><p>仅保留最近 30 次 · 随完整备份保存</p></dialog>
+      <dialog id="tr-art-dialog"><header><h2 id="tr-art-title"></h2><button id="tr-art-close" aria-label="关闭牌图">×</button></header><img id="tr-art-large" alt=""></dialog>`;
     document.getElementById('app').appendChild(root);
     $('tr-back').onclick=()=>navigateTo('pageHome');
-    $('tr-shuffle').onclick=shuffle;$('tr-again').onclick=reset;
+    $('tr-shuffle').onclick=()=>{mix();if(!reduced())$('tr-shuffle-pad').animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:420,easing:'ease-in-out'});};
+    $('tr-finish').onclick=spread;$('tr-again').onclick=reset;
     $('tr-history').onclick=showHistory;$('tr-close').onclick=()=>$('tr-dialog').close();
-    $('tr-dialog').addEventListener('click',e=>{if(e.target===$('tr-dialog'))$('tr-dialog').close();});
+    $('tr-art-close').onclick=()=>$('tr-art-dialog').close();
+    ['tr-dialog','tr-art-dialog'].forEach(id=>$(id).addEventListener('click',e=>{if(e.target===$(id))$(id).close();}));
+    setupGestures();
+    $('tr-deck').addEventListener('scroll',updateRange,{passive:true});
+    $('tr-prev').onclick=()=>browse(-1);$('tr-next').onclick=()=>browse(1);
     reset();
   }
   function people(){
@@ -124,48 +135,86 @@ window.MindTarot = (function () {
     if(state.dreams.some(d=>d.id===id))$('tr-person').value=id;
   }
   function reset(){
-    epoch++;phase='idle';picks=[];flipped=[];saved=false;roundContext=null;
+    phase='idle';picks=[];flipped=[];saved=false;roundContext=null;shuffleCount=0;shuffleDrag=null;rowDrag=null;suppressPickUntil=0;
+    deck=cards.map((c,id)=>({id,reversed:false}));
     $('tr-person').disabled=false;$('tr-question').disabled=false;
     $('tr-reading').innerHTML='';$('tr-again').hidden=true;
-    $('tr-shuffle').hidden=false;$('tr-shuffle').disabled=false;
-    $('tr-status').textContent='78 张完整牌组 · 随机正逆位';
-    $('tr-deck').className='tr-deck';$('tr-deck').innerHTML='';
-    for(let i=0;i<7;i++){
-      const b=document.createElement('button');b.className='tr-back-card';b.type='button';b.disabled=true;b.style.setProperty('--i',i-3);b.setAttribute('aria-label','选择第 '+(i+1)+' 张牌');b.innerHTML='<span aria-hidden="true">✦</span>';b.onclick=()=>pick(i,b);$('tr-deck').appendChild(b);
-    }
-    $('tr-slots').innerHTML=roles.map((role,i)=>`<div class="tr-slot"><span>${role}</span><button class="tr-flip" id="tr-flip-${i}" disabled aria-label="${role}，等待选牌"><span class="tr-card-inner"><span class="tr-card-back">${i+1}</span><span class="tr-card-front"></span></span></button></div>`).join('');
+    $('tr-mixing').hidden=false;$('tr-spread').hidden=true;$('tr-spread').className='';
+    $('tr-finish').disabled=true;
+    $('tr-status').textContent='78 张完整牌组 · 左右滑动洗牌 · 随机正逆位';
+    $('tr-shuffle-pad').classList.remove('is-dragging');$('tr-shuffle-pad').style.setProperty('--drag','0');
+    $('tr-deck').innerHTML='';
+    $('tr-slots').innerHTML=roles.map((role,i)=>`<div class="tr-slot"><span>${role}</span><button class="tr-flip" id="tr-flip-${i}" disabled aria-label="${role}，等待选牌"><span class="tr-card-inner"><span class="tr-card-back">${i+1}</span><span class="tr-card-front" aria-hidden="true"></span></span></button></div>`).join('');
     people();
   }
-  function shuffle(){
-    if(phase!=='idle')return;phase='shuffling';const token=++epoch;
-    roundContext={personId:$('tr-person').value,name:$('tr-person').selectedOptions[0].textContent,question:$('tr-question').value.trim()};
-    $('tr-person').disabled=true;$('tr-question').disabled=true;$('tr-shuffle').disabled=true;
-    deck=cards.map((c,i)=>({id:i,reversed:random(2)===1}));
+  function mix(){
+    if(phase!=='idle'&&phase!=='shuffling')return;
+    if(phase==='idle'){
+      phase='shuffling';roundContext={personId:$('tr-person').value,name:$('tr-person').selectedOptions[0].textContent,question:$('tr-question').value.trim()};
+      $('tr-person').disabled=true;$('tr-question').disabled=true;
+    }
     for(let i=deck.length-1;i>0;i--){const j=random(i+1);[deck[i],deck[j]]=[deck[j],deck[i]];}
-    $('tr-status').textContent='正在洗牌，让心慢慢安静下来…';$('tr-deck').classList.add('is-shuffling');
-    setTimeout(()=>{if(token!==epoch)return;phase='choosing';$('tr-deck').classList.remove('is-shuffling');$('tr-deck').classList.add('is-ready');$('tr-shuffle').hidden=true;$('tr-status').textContent='凭直觉，选出三张牌（0 / 3）';$('tr-deck').querySelectorAll('button').forEach(b=>b.disabled=false);},matchMedia('(prefers-reduced-motion: reduce)').matches?0:1050);
+    deck.forEach(c=>c.reversed=random(2)===1);
+    shuffleCount++;$('tr-finish').disabled=false;
+    $('tr-status').textContent=`已洗牌 ${shuffleCount} 次 · 可以继续滑动，准备好后开始抽牌`;
   }
+  function setupGestures(){
+    const pad=$('tr-shuffle-pad'),row=$('tr-deck');
+    pad.addEventListener('pointerdown',e=>{if((phase!=='idle'&&phase!=='shuffling')||!e.isPrimary||e.button!==0)return;shuffleDrag={id:e.pointerId,x:e.clientX,y:e.clientY,last:e.clientX,travel:0,mixed:0,active:false};});
+    pad.addEventListener('pointermove',e=>{
+      const d=shuffleDrag;if(!d||d.id!==e.pointerId)return;
+      const dx=e.clientX-d.x,dy=e.clientY-d.y;
+      if(!d.active){if(Math.abs(dy)>10&&Math.abs(dy)>Math.abs(dx)){shuffleDrag=null;return;}if(Math.abs(dx)<8)return;d.active=true;pad.setPointerCapture(e.pointerId);pad.classList.add('is-dragging');}
+      d.travel+=Math.abs(e.clientX-d.last);d.last=e.clientX;
+      if(!reduced())pad.style.setProperty('--drag',Math.max(-1,Math.min(1,dx/140)));
+      if(d.travel>=80){mix();d.mixed++;d.travel%=80;}
+    });
+    const release=e=>{const d=shuffleDrag;if(!d||d.id!==e.pointerId)return;if(e.type==='pointerup'&&d.active&&!d.mixed&&d.travel>20)mix();shuffleDrag=null;pad.classList.remove('is-dragging');pad.style.setProperty('--drag','0');if(pad.hasPointerCapture(e.pointerId))pad.releasePointerCapture(e.pointerId);};
+    ['pointerup','pointercancel','lostpointercapture'].forEach(type=>pad.addEventListener(type,release));
+    row.addEventListener('pointerdown',e=>{if(!e.isPrimary||e.button!==0)return;rowDrag={id:e.pointerId,x:e.clientX,y:e.clientY,start:row.scrollLeft,moved:false};suppressPickUntil=0;});
+    row.addEventListener('pointermove',e=>{const d=rowDrag;if(!d||d.id!==e.pointerId)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>8){d.moved=true;suppressPickUntil=Date.now()+500;}if(d.moved&&e.pointerType==='mouse'){row.setPointerCapture(e.pointerId);row.scrollLeft=d.start-(e.clientX-d.x);}});
+    const rowRelease=e=>{const d=rowDrag;if(!d||d.id!==e.pointerId)return;if(d.moved||e.type==='pointercancel')suppressPickUntil=Date.now()+500;rowDrag=null;if(row.hasPointerCapture(e.pointerId))row.releasePointerCapture(e.pointerId);};
+    ['pointerup','pointercancel','lostpointercapture'].forEach(type=>row.addEventListener(type,rowRelease));
+  }
+  function spread(){
+    if(phase!=='shuffling'||!shuffleCount)return;
+    phase='choosing';$('tr-mixing').hidden=true;$('tr-spread').hidden=false;
+    const fragment=document.createDocumentFragment();
+    deck.forEach((_,i)=>{const b=document.createElement('button');b.className='tr-back-card';b.type='button';b.setAttribute('aria-label','选择第 '+(i+1)+' 张牌');b.innerHTML=`<span aria-hidden="true">✦</span><small>${i+1}</small>`;b.onclick=e=>{if(e.detail!==0&&Date.now()<suppressPickUntil)return;pick(i,b);};fragment.appendChild(b);});
+    $('tr-deck').replaceChildren(fragment);$('tr-deck').scrollLeft=0;
+    $('tr-status').textContent='凭直觉，选出三张牌（0 / 3）';updateRange();
+  }
+  function browse(direction){$('tr-deck').scrollBy({left:direction*$('tr-deck').clientWidth*.8,behavior:reduced()?'instant':'smooth'});}
+  function updateRange(){
+    const row=$('tr-deck'),first=row.firstElementChild;if(!first)return;
+    const step=first.offsetWidth+12,start=Math.min(78,Math.floor(row.scrollLeft/step)+1),end=Math.min(78,Math.ceil((row.scrollLeft+row.clientWidth)/step));
+    $('tr-range').textContent=`${start}–${end} / 78`;
+    $('tr-prev').disabled=row.scrollLeft<=1;$('tr-next').disabled=row.scrollLeft+row.clientWidth>=row.scrollWidth-2;
+  }
+  function imageMarkup(p,extra='') {return `<img class="tr-art ${p.reversed?'is-reversed':''} ${extra}" src="${art(p.id)}" alt="${cards[p.id][0]}${p.reversed?'逆位':'正位'}" draggable="false">`;}
   function pick(i,button){
     if(phase!=='choosing'||button.disabled||picks.length===3)return;
-    const n=picks.length;picks.push(deck[i]);button.disabled=true;button.classList.add('is-picked');
+    const n=picks.length;picks.push(deck[i]);button.disabled=true;button.classList.add('is-picked');button.setAttribute('aria-label','第 '+(i+1)+' 张牌，已选');
     const flip=$('tr-flip-'+n);flip.classList.add('has-card');
-    const c=cards[deck[i].id];flip.querySelector('.tr-card-front').innerHTML=`<span class="tr-number">${c[1]}</span><span class="tr-sigil ${deck[i].reversed?'reversed':''}" aria-hidden="true">✧</span><strong>${c[0]}</strong><small>${deck[i].reversed?'逆位':'正位'}</small>`;
+    const c=cards[deck[i].id];flip.querySelector('.tr-card-front').innerHTML=`${imageMarkup(deck[i])}<strong>${c[0]}</strong><small>${deck[i].reversed?'逆位':'正位'}</small>`;
     $('tr-status').textContent=`凭直觉，选出三张牌（${picks.length} / 3）`;
-    if(picks.length===3){phase='revealing';$('tr-deck').classList.add('is-complete');$('tr-deck').querySelectorAll('button').forEach(b=>b.disabled=true);$('tr-status').textContent='三张心声已就位，轻点下方牌面翻开';picks.forEach((_,j)=>{const f=$('tr-flip-'+j);f.disabled=false;f.setAttribute('aria-label','翻开'+roles[j]);f.onclick=()=>reveal(j);});}
+    if(picks.length===3){phase='revealing';$('tr-spread').classList.add('is-complete');$('tr-deck').querySelectorAll('button').forEach(b=>b.disabled=true);$('tr-prev').disabled=true;$('tr-next').disabled=true;$('tr-status').textContent='三张心声已就位，轻点下方牌面翻开';picks.forEach((_,j)=>{const f=$('tr-flip-'+j);f.disabled=false;f.setAttribute('aria-label','翻开'+roles[j]);f.onclick=()=>reveal(j);});}
   }
+  function showArt(p){const c=cards[p.id];$('tr-art-title').textContent=c[0]+' · '+(p.reversed?'逆位':'正位');const img=$('tr-art-large');img.src=art(p.id);img.alt=c[0];img.className=p.reversed?'is-reversed':'';$('tr-art-dialog').showModal();}
   function reveal(i){
     if(phase!=='revealing'||flipped.includes(i))return;flipped.push(i);
     const pick=picks[i],c=cards[pick.id],f=$('tr-flip-'+i);
-    f.classList.add('is-flipped');f.disabled=true;f.setAttribute('aria-label',roles[i]+'：'+c[0]+'，'+(pick.reversed?'逆位':'正位'));
+    f.classList.add('is-flipped');f.disabled=true;f.querySelector('.tr-card-front').removeAttribute('aria-hidden');f.setAttribute('aria-label',roles[i]+'：'+c[0]+'，'+(pick.reversed?'逆位':'正位'));
     const article=document.createElement('article');article.className='tr-message';article.dataset.slot=i;
-    article.innerHTML=`<span>${roles[i]} · ${c[0]}${pick.reversed?'逆位':'正位'}</span><h3>${c[2]}</h3><p>${esc(c[pick.reversed?4:3])}</p>`;
+    article.innerHTML=`<span>${roles[i]} · ${c[0]}${pick.reversed?'逆位':'正位'}</span><h3>${c[2]}</h3><p>${esc(c[pick.reversed?4:3])}</p><button class="tr-art-open">查看完整牌图 ↗</button>`;
+    article.querySelector('button').onclick=()=>showArt(pick);
     const next=Array.from($('tr-reading').children).find(el=>Number(el.dataset.slot)>i);$('tr-reading').insertBefore(article,next||null);
     if(flipped.length===3){phase='done';$('tr-status').textContent='这一次的心声，已经收好';$('tr-again').hidden=false;
       if(!saved){saved=true;history().unshift({...roundContext,time:Date.now(),cards:picks.map(p=>({...p}))});state.tarotHistory=history().slice(0,30);saveState();}
     }
   }
   function showHistory(){
-    $('tr-history-list').innerHTML=history().map(r=>`<article><time>${esc(new Date(r.time).toLocaleString('zh-CN'))}</time><h3>${esc(r.name)}</h3>${r.question?'<p>'+esc(r.question)+'</p>':''}${r.cards.map((p,i)=>{const c=cards[p.id];return c?`<details><summary>${roles[i]} · ${c[0]}${p.reversed?'逆位':'正位'}</summary><p>${esc(c[p.reversed?4:3])}</p></details>`:'';}).join('')}</article>`).join('')||'<p class="tr-empty">还没有传讯记录。翻开三张牌后，会自动收在这里。</p>';
+    $('tr-history-list').innerHTML=history().map(r=>`<article><time>${esc(new Date(r.time).toLocaleString('zh-CN'))}</time><h3>${esc(r.name)}</h3>${r.question?'<p>'+esc(r.question)+'</p>':''}${r.cards.map((p,i)=>{const c=cards[p.id];return c?`<details><summary>${roles[i]} · ${c[0]}${p.reversed?'逆位':'正位'}</summary>${imageMarkup(p,'tr-history-art')}<p>${esc(c[p.reversed?4:3])}</p></details>`:'';}).join('')}</article>`).join('')||'<p class="tr-empty">还没有传讯记录。翻开三张牌后，会自动收在这里。</p>';
     $('tr-dialog').showModal();
   }
   return {prepare:function(){if(!root)make();people();}};

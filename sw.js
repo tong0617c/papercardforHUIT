@@ -1,13 +1,13 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-work-protection-1';
+var CACHE_NAME = 'mind-v2-tarot-touch-1';
 var URLS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './home-theme.css',
   './home-theme.js',
-  './tarot.js',
-  './tarot.css',
+  './tarot.js?v=touch1',
+  './tarot.css?v=touch1',
   './trace-host.js',
   './trace-host.css',
   './trace.html',
@@ -23,6 +23,10 @@ var URLS_TO_CACHE = [
   './icon-huit.png',
   './manifest.json'
 ];
+for (var tarotId = 0; tarotId < 78; tarotId++) {
+  URLS_TO_CACHE.push('./tarot-images/card-' + String(tarotId).padStart(2, '0') + '.webp');
+}
+URLS_TO_CACHE.push('./tarot-images/sources.json');
 
 self.addEventListener('install', function(e) {
   self.skipWaiting();
