@@ -96,7 +96,7 @@ window.MindTarot = (function () {
   minorSuits.forEach(([suit, meanings]) => meanings.forEach((meaning,i) => cards.push([suit+ranks[i],rankMarks[i],...meaning])));
   const roles=['想对你说','心里的牵挂','此刻的回应'];
   let root, deck=[], picks=[], flipped=[], phase='idle', roundContext=null, saved=false, shuffleCount=0;
-  let shuffleDrag=null, rowDrag=null, suppressPickUntil=0;
+  let shuffleDrag=null, rowDrag=null, suppressPickUntil=0, tableCards=[], tableFrame=0;
   const $=id=>root.querySelector('#'+id);
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const art=id=>'tarot-images/card-'+String(id).padStart(2,'0')+'.webp';
@@ -108,7 +108,7 @@ window.MindTarot = (function () {
     root.innerHTML=`<div class="tr-head"><button id="tr-back" aria-label="返回主页">‹</button><span>塔罗传讯</span><button id="tr-history" aria-label="查看传讯记录">记录</button></div>
       <div class="tr-scroll"><div class="tr-intro"><span class="tr-eyebrow">A LITTLE WHISPER</span><h1>把心事，交给这一刻</h1><p>静下来，想一想你想收到的话。</p></div>
       <div class="tr-form"><label>传讯对象<select id="tr-person"></select></label><label>此刻的心事 <span>选填</span><input id="tr-question" maxlength="120" placeholder="今天，你有什么想对我说的吗？"></label></div>
-      <div class="tr-stage"><div id="tr-mixing"><div id="tr-shuffle-pad" aria-label="左右滑动洗牌，也可使用下方洗一次按钮"><div class="tr-orbit" aria-hidden="true"></div><div class="tr-mix-stack" aria-hidden="true">${Array.from({length:9},(_,i)=>`<span class="tr-mix-card" style="--i:${i-4}">✦</span>`).join('')}</div><span class="tr-gesture-hint">← 左右滑动，亲手洗牌 →</span></div><div class="tr-mix-actions"><button id="tr-shuffle" class="tr-secondary">洗一次</button><button id="tr-finish" class="tr-primary" disabled>洗好了，开始抽牌</button></div></div>
+      <div class="tr-stage"><div id="tr-mixing"><div id="tr-shuffle-pad" aria-label="在桌面任意方向推牌、画圈洗牌，也可使用下方洗一次按钮"><div class="tr-orbit" aria-hidden="true"></div><div class="tr-mix-stack" aria-hidden="true">${Array.from({length:24},(_,i)=>`<span class="tr-mix-card" style="--i:${i-4}">✦</span>`).join('')}</div><span class="tr-gesture-hint">在牌桌上推散、画圈，像洗麻将一样洗牌</span></div><div class="tr-mix-actions"><button id="tr-shuffle" class="tr-secondary">洗一次</button><button id="tr-finish" class="tr-primary" disabled>洗好了，开始抽牌</button></div></div>
       <div id="tr-spread" hidden><div class="tr-spread-heading"><span>78 张完整牌组</span><span id="tr-range"></span></div><div id="tr-deck" class="tr-deck" aria-label="78 张待选牌，左右滑动浏览"></div><div class="tr-row-controls"><button id="tr-prev" aria-label="向左浏览牌组">‹</button><span>左右滑动浏览 · 轻点选牌</span><button id="tr-next" aria-label="向右浏览牌组">›</button></div></div>
       <p id="tr-status" role="status" aria-live="polite"></p></div>
       <div id="tr-slots" class="tr-slots"></div><div id="tr-reading" aria-live="polite"></div>
@@ -117,7 +117,7 @@ window.MindTarot = (function () {
       <dialog id="tr-art-dialog"><header><h2 id="tr-art-title"></h2><button id="tr-art-close" aria-label="关闭牌图">×</button></header><img id="tr-art-large" alt=""></dialog>`;
     document.getElementById('app').appendChild(root);
     $('tr-back').onclick=()=>navigateTo('pageHome');
-    $('tr-shuffle').onclick=()=>{mix();if(!reduced())$('tr-shuffle-pad').animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:420,easing:'ease-in-out'});};
+    $('tr-shuffle').onclick=()=>{mix();scatterTable();};
     $('tr-finish').onclick=spread;$('tr-again').onclick=reset;
     $('tr-history').onclick=showHistory;$('tr-close').onclick=()=>$('tr-dialog').close();
     $('tr-art-close').onclick=()=>$('tr-art-dialog').close();
@@ -141,9 +141,10 @@ window.MindTarot = (function () {
     $('tr-reading').innerHTML='';$('tr-again').hidden=true;
     $('tr-mixing').hidden=false;$('tr-spread').hidden=true;$('tr-spread').className='';
     $('tr-finish').disabled=true;
-    $('tr-status').textContent='78 张完整牌组 · 左右滑动洗牌 · 随机正逆位';
+    $('tr-status').textContent='78 张完整牌组 · 推散混洗 · 随机正逆位';
     $('tr-shuffle-pad').classList.remove('is-dragging');$('tr-shuffle-pad').style.setProperty('--drag','0');
     $('tr-deck').innerHTML='';
+    requestAnimationFrame(scatterTable);
     $('tr-slots').innerHTML=roles.map((role,i)=>`<div class="tr-slot"><span>${role}</span><button class="tr-flip" id="tr-flip-${i}" disabled aria-label="${role}，等待选牌"><span class="tr-card-inner"><span class="tr-card-back">${i+1}</span><span class="tr-card-front" aria-hidden="true"></span></span></button></div>`).join('');
     people();
   }
@@ -158,18 +159,21 @@ window.MindTarot = (function () {
     shuffleCount++;$('tr-finish').disabled=false;
     $('tr-status').textContent=`已洗牌 ${shuffleCount} 次 · 可以继续滑动，准备好后开始抽牌`;
   }
+  function paintTable(){tableFrame=0;$('tr-shuffle-pad').querySelectorAll('.tr-mix-card').forEach((el,i)=>{const c=tableCards[i];if(c)el.style.transform=`translate(${c.x-26}px,${c.y-42}px) rotate(${c.angle}deg)`;});}
+  function queueTablePaint(){if(!tableFrame)tableFrame=requestAnimationFrame(paintTable);}
+  function scatterTable(){const width=$('tr-shuffle-pad').clientWidth||300;tableCards=Array.from({length:24},(_,i)=>({x:35+(i%6)*(width-70)/5+(random(13)-6),y:52+Math.floor(i/6)*52+random(15),angle:random(130)-65}));queueTablePaint();}
   function setupGestures(){
     const pad=$('tr-shuffle-pad'),row=$('tr-deck');
-    pad.addEventListener('pointerdown',e=>{if((phase!=='idle'&&phase!=='shuffling')||!e.isPrimary||e.button!==0)return;shuffleDrag={id:e.pointerId,x:e.clientX,y:e.clientY,last:e.clientX,travel:0,mixed:0,active:false};});
+    pad.addEventListener('pointerdown',e=>{if((phase!=='idle'&&phase!=='shuffling')||!e.isPrimary||e.button!==0)return;const b=pad.getBoundingClientRect();shuffleDrag={id:e.pointerId,x:e.clientX-b.left,y:e.clientY-b.top,travel:0,mixed:0,active:false};pad.setPointerCapture(e.pointerId);pad.classList.add('is-dragging');});
     pad.addEventListener('pointermove',e=>{
       const d=shuffleDrag;if(!d||d.id!==e.pointerId)return;
-      const dx=e.clientX-d.x,dy=e.clientY-d.y;
-      if(!d.active){if(Math.abs(dy)>10&&Math.abs(dy)>Math.abs(dx)){shuffleDrag=null;return;}if(Math.abs(dx)<8)return;d.active=true;pad.setPointerCapture(e.pointerId);pad.classList.add('is-dragging');}
-      d.travel+=Math.abs(e.clientX-d.last);d.last=e.clientX;
-      if(!reduced())pad.style.setProperty('--drag',Math.max(-1,Math.min(1,dx/140)));
+      const b=pad.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top,dx=x-d.x,dy=y-d.y,dist=Math.hypot(dx,dy);
+      if(dist<1)return;d.active=true;d.travel+=dist;
+      tableCards.forEach((c,i)=>{const distance=Math.hypot(c.x-d.x,c.y-d.y),force=Math.max(.06,1-distance/150);c.x=Math.max(27,Math.min(pad.clientWidth-27,c.x+dx*force*1.3-dy*force*(i%2?.22:-.22)));c.y=Math.max(45,Math.min(235,c.y+dy*force*1.3+dx*force*(i%2?.22:-.22)));c.angle+=(dx-dy)*force*(i%2?.7:-.7);});
+      d.x=x;d.y=y;queueTablePaint();
       if(d.travel>=80){mix();d.mixed++;d.travel%=80;}
     });
-    const release=e=>{const d=shuffleDrag;if(!d||d.id!==e.pointerId)return;if(e.type==='pointerup'&&d.active&&!d.mixed&&d.travel>20)mix();shuffleDrag=null;pad.classList.remove('is-dragging');pad.style.setProperty('--drag','0');if(pad.hasPointerCapture(e.pointerId))pad.releasePointerCapture(e.pointerId);};
+    const release=e=>{const d=shuffleDrag;if(!d||d.id!==e.pointerId)return;if(e.type==='pointerup'&&d.active&&!d.mixed&&d.travel>20)mix();shuffleDrag=null;pad.classList.remove('is-dragging');if(pad.hasPointerCapture(e.pointerId))pad.releasePointerCapture(e.pointerId);};
     ['pointerup','pointercancel','lostpointercapture'].forEach(type=>pad.addEventListener(type,release));
     row.addEventListener('pointerdown',e=>{if(!e.isPrimary||e.button!==0)return;rowDrag={id:e.pointerId,x:e.clientX,y:e.clientY,start:row.scrollLeft,moved:false};suppressPickUntil=0;});
     row.addEventListener('pointermove',e=>{const d=rowDrag;if(!d||d.id!==e.pointerId)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>8){d.moved=true;suppressPickUntil=Date.now()+500;}if(d.moved&&e.pointerType==='mouse'){row.setPointerCapture(e.pointerId);row.scrollLeft=d.start-(e.clientX-d.x);}});

@@ -79,6 +79,8 @@ let state = {
   dreamRecallDone: {},
   mochiTrace: {},
   tarotHistory: [],
+  pendingReplies: {},
+  replyCheckpointAt: 0,
 };
 
 // ===== 图标配置 =====
@@ -382,7 +384,8 @@ function renderIconSettings() {
 
 // ===== INIT =====
 async function init() {
-  await loadState(); 
+  await loadState();
+  MindReply.init(); 
     // 给所有梦角补上 balance 字段
   if (state.dreams && Array.isArray(state.dreams)) {
       if (!state.giftItems || !Array.isArray(state.giftItems) || state.giftItems.length === 0) {
@@ -533,7 +536,9 @@ function loadState() {
             if (parsed.dreamRecall) state.dreamRecall = parsed.dreamRecall;
             if (parsed.dreamRecallDone) state.dreamRecallDone = parsed.dreamRecallDone;
             if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
-            if (Array.isArray(parsed.tarotHistory)) state.tarotHistory = parsed.tarotHistory;
+            if (parsed.pendingReplies) state.pendingReplies = parsed.pendingReplies;
+        state.replyCheckpointAt = parsed.replyCheckpointAt || 0;
+        if (Array.isArray(parsed.tarotHistory)) state.tarotHistory = parsed.tarotHistory;
           } catch(err) {}
         }
         resolve();
@@ -553,6 +558,8 @@ function loadState() {
         if (parsed.dreams) state.dreams = parsed.dreams;
         // ... (为了简洁，这里用同样的方式把剩下的字段读一遍) ...
         if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
+        if (parsed.pendingReplies) state.pendingReplies = parsed.pendingReplies;
+        state.replyCheckpointAt = parsed.replyCheckpointAt || 0;
         if (Array.isArray(parsed.tarotHistory)) state.tarotHistory = parsed.tarotHistory;
       } catch(e) {}
     }
@@ -1278,6 +1285,7 @@ function restoreData(e) {
       var data = JSON.parse(ev.target.result);
       // 恢复 state
       MindTrace.reset();
+      MindReply.clear();
       if (data.state) {
         Object.assign(state, data.state);
         if (data.chatMessages) chatMessages = data.chatMessages;
@@ -3357,6 +3365,7 @@ function openChat(id) {
   
   // 强制跳转到私聊页面
   navigateTo('pagePrivateChat');
+  MindReply.tick();
   try { updateAppIconBadges(); } catch(e) {}
 }
 
@@ -3740,6 +3749,7 @@ function selectMuteTime(memberId) {
   if (!g.muteEndsAt) g.muteEndsAt = {};
   g.muteEndsAt[String(memberId)] = Date.now() + duration; // 强制转成字符串
 
+  MindReply.cancel(g.id);
   // 【核心】取消之前所有的 AI 回复闹钟，防止他在被禁言后还能发出声音
   if (window.replyTimeout) {
     clearTimeout(window.replyTimeout);
@@ -3875,59 +3885,7 @@ function sendImageMessage(e) {
 }
 
 // ===== 正在输入 + 延迟回复调度器（终极唯一版） =====
-function scheduleAiReply() {
-  if (window.typingTimeout) clearTimeout(window.typingTimeout);
-  if (window.replyTimeout) clearTimeout(window.replyTimeout);
-  if (window.readTimeout) clearTimeout(window.readTimeout);
-
-  // 提前选好回复的角色（群聊）
-  window.nextReplySender = null;
-  if (state.currentChatId && state.currentChatId.startsWith('group_')) {
-    var g = state.groups.find(function(item) { return item.id === state.currentChatId; });
-    if (g && g.memberIds.length > 0) {
-      var availableIds = g.memberIds.filter(function(id) {
-        return !g.muteEndsAt || g.muteEndsAt[String(id)] === undefined;
-      });
-      if (availableIds.length > 0) {
-        var randomId = availableIds[Math.floor(Math.random() * availableIds.length)];
-        var member = state.dreams.find(function(item) { return item.id === randomId; });
-        if (member) {
-          window.nextReplySender = { id: member.id, name: member.name, avatar: member.avatar || '' };
-        }
-      }
-    }
-  }
-
-  // 【已读】：1.5-4 秒后所有消息变已读
-  window.readTimeout = setTimeout(function() {
-    var hasUnread = false;
-    for (var i = 0; i < chatMessages.length; i++) {
-      if (chatMessages[i].from === 'user' && chatMessages[i].status === 'unread') {
-        chatMessages[i].status = 'read';
-        hasUnread = true;
-      }
-    }
-    if (hasUnread) { saveChatMessages(); renderChatMessages(); }
-  }, 1500 + Math.random() * 2500);
-
-  // 【已读不回】：开启后，10% 概率不回
-  if (state.settings && state.settings.readNoReply) {
-    if (Math.random() < 0.1) {
-      // 只已读，不回
-      return;
-    }
-  }
-
-  // 正常回复：显示"正在输入" + 延迟发消息
-  window.typingTimeout = setTimeout(function() { showTypingIndicator(); }, 1000 + Math.random() * 1000);
-
-  var minS = (state.settings && state.settings.replyMinSec != null) ? state.settings.replyMinSec : 3;
-  var maxS = (state.settings && state.settings.replyMaxSec != null) ? state.settings.replyMaxSec : 7;
-  if (maxS < minS) maxS = minS;
-  var delayMs = (minS + Math.random() * (maxS - minS)) * 1000;
-
-  window.replyTimeout = setTimeout(function() { hideTypingIndicator(); dreamReply(); }, delayMs);
-}
+function scheduleAiReply() { MindReply.schedule(); }
 
 function showTypingIndicator() {
   var indicator = document.getElementById('typingIndicator');

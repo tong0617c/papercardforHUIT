@@ -69,4 +69,11 @@
 #tr-art-large{display:block;max-height:70vh;max-width:100%;width:auto;margin:auto;border-radius:6px;}
 @media(hover:hover){.tr-back-card:not(:disabled):hover{transform:translateY(-6px);}}
 @media(max-width:350px){.tr-mix-actions{gap:6px;}.tr-mix-actions .tr-primary{padding:11px 12px;font-size:13px!important;}.tr-slots{gap:7px;}.tr-card-front strong{font-size:11px;}}
-@media(prefers-reduced-motion:reduce){#pageTarot *,#pageTarot *::before,#pageTarot *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+@media(prefers-reduced-motion:reduce){#pageTarot *,#pageTarot *::before,#pageTarot *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}/* Mahjong-style wash: loose cards stay where the hand pushes them. */
+#tr-shuffle-pad{height:316px;touch-action:none;border-radius:24px;background:radial-gradient(ellipse,#e9dbea9c,#f6eef65c);overflow:hidden;}
+.tr-mix-card{left:0;top:0;width:52px;height:84px;font-size:21px;transform-origin:center;box-shadow:0 3px 7px #47304c30;transition:transform .65s cubic-bezier(.22,1,.36,1);will-change:transform;}
+.tr-mix-card:before{inset:4px;}
+.tr-orbit{width:80%;height:220px;top:25px;}
+.tr-gesture-hint{bottom:10px;font-size:11px;}
+.is-dragging .tr-mix-card{transition:none;}
+@media(prefers-reduced-motion:reduce){.tr-mix-card{transition:none!important;}}

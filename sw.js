@@ -1,13 +1,13 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-tarot-touch-1';
+var CACHE_NAME = 'mind-v2-table-recovery-1';
 var URLS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './home-theme.css',
   './home-theme.js',
-  './tarot.js?v=touch1',
-  './tarot.css?v=touch1',
+  './tarot.js?v=table2',
+  './tarot.css?v=table2',
   './trace-host.js',
   './trace-host.css',
   './trace.html',
@@ -19,7 +19,8 @@ var URLS_TO_CACHE = [
   './trace-mochi.css',
   './trace-start.js',
   './trace-notice.html',
-  './script.js',
+  './reply-recovery.js?v=1',
+  './script.js?v=recovery1',
   './icon-huit.png',
   './manifest.json'
 ];
