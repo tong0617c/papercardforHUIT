@@ -1,6 +1,6 @@
 /* Persist scheduled local replies across suspension and page reloads. */
 window.MindReply = (function(){
-  const key='mind-reply-checkpoint-v1';let timer=null,ready=false,running=false;
+  const key='mind-reply-checkpoint-v1';let timer=null,ready=false,running=false,typingToken=null;
   function live(id){return id.startsWith('group_')?state.groups.some(g=>g.id===id):state.dreams.some(d=>d.id===id);}
   function queue(){return state.pendingReplies||(state.pendingReplies={});}
   function checkpoint(ids){
@@ -19,6 +19,12 @@ window.MindReply = (function(){
   }
   function schedule(){
     const id=state.currentChatId;if(!id||!live(id))return;
+    // Consecutive messages share the pending reply, without restarting its clock.
+    if(queue()[id] && Number.isFinite(queue()[id].dueAt)){
+      checkpoint([id]);
+      tick();
+      return;
+    }
     let sender=null;
     if(id.startsWith('group_')){const g=state.groups.find(g=>g.id===id);checkExpiredMutes(g);const candidates=g.memberIds.filter(id=>String(id)!=='user'&&(!g.muteEndsAt||g.muteEndsAt[String(id)]===undefined));const d=state.dreams.find(d=>d.id===candidates[Math.floor(Math.random()*candidates.length)]);if(d)sender={id:d.id,name:d.name,avatar:d.avatar||''};}
     const settings=state.settings||{},now=Date.now();
@@ -46,8 +52,14 @@ window.MindReply = (function(){
         changed.push(id);
       }
       if(changed.length){checkpoint(changed);loadChatMessages();renderChatMessages();try{updateAppIconBadges();}catch(e){}}
-      hideTypingIndicator();const current=queue()[state.currentChatId];
-      if(current&&!current.skip&&current.typingAt<=now){window.nextReplySender=current.sender;showTypingIndicator();}
+      const current=queue()[state.currentChatId];
+      if(current&&!current.skip&&current.typingAt<=now){
+        const token=state.currentChatId+':'+current.typingAt;
+        const indicator=document.getElementById('typingIndicator');
+        window.nextReplySender=current.sender;
+        if(typingToken!==token||!indicator||indicator.style.display==='none')showTypingIndicator();
+        typingToken=token;
+      }else{typingToken=null;hideTypingIndicator();}
       const times=[];Object.values(queue()).forEach(j=>{if(j.readAt!==null)times.push(j.readAt);if(!j.skip)times.push(j.dueAt);if(j.typingAt>now)times.push(j.typingAt);});
       if(times.length)timer=setTimeout(tick,Math.max(50,Math.min(2147483647,Math.min(...times)-Date.now())));
     }finally{running=false;}

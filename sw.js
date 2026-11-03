@@ -1,5 +1,5 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-table-recovery-1';
+var CACHE_NAME = 'mind-v2-reply-burst-2';
 var URLS_TO_CACHE = [
   './',
   './index.html',
@@ -19,7 +19,7 @@ var URLS_TO_CACHE = [
   './trace-mochi.css',
   './trace-start.js',
   './trace-notice.html',
-  './reply-recovery.js?v=1',
+  './reply-recovery.js?v=2',
   './script.js?v=recovery1',
   './icon-huit.png',
   './manifest.json'
