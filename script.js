@@ -78,6 +78,7 @@ let state = {
   dreamRecall: { records: [] },
   dreamRecallDone: {},
   mochiTrace: {},
+  dreamLedger: [],
   tarotHistory: [],
   pendingReplies: {},
   replyCheckpointAt: 0,
@@ -106,6 +107,7 @@ const ICONS_CONFIG = [
   { key: 'pageAvatar', name: '头像', emoji: '🖼️', color: 'icon-pink' },
   { key: 'pageWidgets', name: '小组件', emoji: '🧩', color: 'icon-purple' },
   { key: 'pageMochiTrace', name: '寻踪', emoji: '📍', color: 'icon-purple' },
+  { key: 'pageDreamLedger', name: '梦女账本', emoji: '📒', color: 'icon-purple' },
   { key: 'pageTarot', name: '塔罗传讯', emoji: '✧', color: 'icon-purple' },
 ];
 
@@ -538,6 +540,7 @@ function loadState() {
             if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
             if (parsed.pendingReplies) state.pendingReplies = parsed.pendingReplies;
         state.replyCheckpointAt = parsed.replyCheckpointAt || 0;
+        if (Array.isArray(parsed.dreamLedger)) state.dreamLedger = parsed.dreamLedger;
         if (Array.isArray(parsed.tarotHistory)) state.tarotHistory = parsed.tarotHistory;
           } catch(err) {}
         }
@@ -560,6 +563,7 @@ function loadState() {
         if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
         if (parsed.pendingReplies) state.pendingReplies = parsed.pendingReplies;
         state.replyCheckpointAt = parsed.replyCheckpointAt || 0;
+        if (Array.isArray(parsed.dreamLedger)) state.dreamLedger = parsed.dreamLedger;
         if (Array.isArray(parsed.tarotHistory)) state.tarotHistory = parsed.tarotHistory;
       } catch(e) {}
     }
@@ -578,6 +582,7 @@ function updateTime() {
 // ===== NAVIGATION =====
 function navigateTo(pageId) {
   if (pageId === 'pageMochiTrace') { MindTrace.open(); return; }
+  if (pageId === 'pageDreamLedger') DreamLedger.open();
   if (pageId === 'pageTarot') MindTarot.prepare();
   // 1. 先隐藏所有页面
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -13357,3 +13362,43 @@ function calcWidgetDropPos(ghostLeft, ghostTop, w) {
 
   return { page: pageIdx, row: row, col: col };
 }
+
+// Personal spending ledger. Store integer hundredths; no date or currency assumptions.
+const DreamLedger = (function(){
+  const el=id=>document.getElementById('dl-'+id);
+  let editing=null;
+  const format=cents=>(cents/100n).toString()+'.'+(cents%100n).toString().padStart(2,'0');
+  function render(){
+    const list=el('list'),fragment=document.createDocumentFragment();let total=0n;
+    for(const entry of state.dreamLedger){
+      if(!entry||!Number.isSafeInteger(entry.cents)||entry.cents<0)continue;
+      total+=BigInt(entry.cents);
+      const article=document.createElement('article');article.className='dl-entry';
+      article.innerHTML='<header><h3></h3><strong></strong></header><p></p><div class="dl-actions"><button type="button">编辑</button><button type="button">删除</button></div>';
+      article.querySelector('h3').textContent=entry.title;article.querySelector('strong').textContent=format(BigInt(entry.cents));
+      article.querySelector('p').textContent=entry.detail;
+      const [edit,del]=article.querySelectorAll('button');edit.onclick=()=>form(entry);
+      del.onclick=()=>{if(!confirm('删除「'+entry.title+'」这笔支出？'))return;state.dreamLedger=state.dreamLedger.filter(x=>x!==entry);if(editing===entry)close();saveState();render();};
+      fragment.appendChild(article);
+    }
+    if(!fragment.childElementCount){const empty=document.createElement('p');empty.className='dl-empty';empty.textContent='还没有支出，点「记一笔」记录第一笔约稿或周边吧。';fragment.appendChild(empty);}
+    list.replaceChildren(fragment);el('total').textContent=format(total);
+  }
+  function close(){editing=null;el('form').hidden=true;el('add').hidden=false;el('form').reset();}
+  function form(entry){
+    editing=entry;el('form-title').textContent=entry?'编辑支出':'记一笔支出';
+    el('title').value=entry?entry.title:'';el('detail').value=entry?entry.detail:'';
+    el('amount').value=entry?format(BigInt(entry.cents)):'';el('form').hidden=false;el('add').hidden=true;el('title').focus();
+  }
+  el('add').onclick=()=>form(null);el('cancel').onclick=close;
+  el('form').onsubmit=e=>{e.preventDefault();
+    const title=el('title').value.trim(),detail=el('detail').value.trim(),raw=el('amount').value.trim();
+    if(!title){showToast('请填写大标题');el('title').focus();return;}
+    if(!/^\d{1,12}(?:\.\d{1,2})?$/.test(raw)){showToast('请输入正金额，最多两位小数');el('amount').focus();return;}
+    const [whole,fraction='']=raw.split('.'),cents=Number(whole)*100+Number(fraction.padEnd(2,'0'));
+    if(!cents){showToast('金额需要大于 0');return;}
+    if(editing)Object.assign(editing,{title,detail,cents});else state.dreamLedger.unshift({title,detail,cents});
+    saveState();close();render();
+  };
+  return {open(){close();render();}};
+})();

@@ -18,6 +18,18 @@
   <link rel="stylesheet" href="tarot.css?v=table2">
 <style id="userCustomStyle"></style>
 <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
+<style>
+#pageDreamLedger{color:#573e48;background:#fcf7f8}
+.dl-body{overflow-y:auto;flex:1;min-height:0;padding:18px 16px 36px}
+.dl-total,.dl-entry,#dl-form{padding:18px;border-radius:16px;background:#fff;border:1px solid #eadde1;margin:0 0 12px}
+.dl-total{background:#f1e2e7}.dl-total output{display:block;font-size:32px;font-variant-numeric:tabular-nums;margin-top:5px;overflow-wrap:anywhere}
+#pageDreamLedger .dl-body button{border:0;border-radius:10px;background:#f6eef1;color:#714b5b;padding:10px 14px;min-height:44px}
+#pageDreamLedger .dl-primary{background:#85556a;color:white}
+#dl-add{margin:0 0 16px}#dl-form label{display:block;margin:10px 0;font-size:14px}
+#dl-form input,#dl-form textarea{display:block;width:100%;box-sizing:border-box;margin-top:5px;border:1px solid #dfcfd5;border-radius:10px;padding:10px;background:#fff;color:#493740;font-size:16px}
+#dl-form h3,.dl-entry h3{margin:0;font-size:16px}.dl-entry header{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.dl-entry h3,.dl-entry p{overflow-wrap:anywhere}.dl-entry strong{font-variant-numeric:tabular-nums}
+.dl-entry p{white-space:pre-wrap;line-height:1.65;margin:10px 0}.dl-actions{display:flex;gap:8px;margin-top:10px}.dl-empty{color:#795f6a;text-align:center;padding:22px 8px}
+</style>
 </head>
 <body>
 
@@ -34,6 +46,21 @@
   </div>
 </div>
 
+<section class="page" id="pageDreamLedger">
+  <div class="page-header"><button class="back-btn" onclick="navigateTo('pageHome')" aria-label="返回主页">‹</button><h2>梦女账本</h2></div>
+  <div class="dl-body">
+    <div class="dl-total">总支出<output id="dl-total" aria-live="polite">0.00</output></div>
+    <button id="dl-add" class="dl-primary" type="button">＋ 记一笔</button>
+    <form id="dl-form" hidden>
+      <h3 id="dl-form-title">记一笔支出</h3>
+      <label>大标题<input id="dl-title" required maxlength="120" placeholder="例如：双人约稿"></label>
+      <label>详细内容<textarea id="dl-detail" rows="3" placeholder="例如：和梦角的生日贺图，双人半身"></textarea></label>
+      <label>金额<input id="dl-amount" inputmode="decimal" required placeholder="0.00"></label>
+      <div class="dl-actions"><button class="dl-primary" type="submit">保存</button><button type="button" id="dl-cancel">取消</button></div>
+    </form>
+    <div id="dl-list"></div>
+  </div>
+</section>
 <!-- ===== PAGE: Companion ===== -->
 <div class="page" id="pageCompanion">
   <div class="page-header">
@@ -1509,6 +1536,6 @@
 <script src="trace-host.js"></script>
 <script src="tarot.js?v=table2"></script>
 <script src="reply-recovery.js?v=2"></script>
-<script src="script.js?v=recovery1"></script>
+<script src="script.js?v=ledger1"></script>
 </body>
 </html>
