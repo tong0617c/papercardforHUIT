@@ -387,7 +387,7 @@ function renderIconSettings() {
 // ===== INIT =====
 async function init() {
   await loadState();
-  MindReply.init(); 
+  MindListen.init(); MindReply.init(); 
     // 给所有梦角补上 balance 字段
   if (state.dreams && Array.isArray(state.dreams)) {
       if (!state.giftItems || !Array.isArray(state.giftItems) || state.giftItems.length === 0) {
@@ -559,7 +559,8 @@ function loadState() {
         if (parsed.profile) state.profile = parsed.profile;
         if (parsed.dream) state.dream = parsed.dream;
         if (parsed.dreams) state.dreams = parsed.dreams;
-        // ... (为了简洁，这里用同样的方式把剩下的字段读一遍) ...
+        if (parsed.musicLibrary) state.musicLibrary = parsed.musicLibrary;
+        if (parsed.chatSessions) state.chatSessions = parsed.chatSessions;
         if (parsed.mochiTrace) state.mochiTrace = parsed.mochiTrace;
         if (parsed.pendingReplies) state.pendingReplies = parsed.pendingReplies;
         state.replyCheckpointAt = parsed.replyCheckpointAt || 0;
@@ -615,7 +616,7 @@ function navigateTo(pageId) {
     if (pageId === 'pageWordCards') renderWordCards();
     if (pageId === 'pageStickers') renderStickerGroups();
     if (pageId === 'pageWork') renderWorkCards();
-    if (pageId === 'pageMusic') renderMusicList();
+    if (pageId === 'pageMusic') { renderMusicList(); OnlineMusic.open(); }
     if (pageId === 'pageCallHistory') renderCallHistory();
     if (pageId === 'pageCheckinHistory') renderCheckinHistory();
     if (pageId === 'pageProfile') loadProfileForm();
@@ -1503,9 +1504,9 @@ function triggerCall() {
   `;
   
   if (state.settings.callBg) {
-    document.getElementById('callCard').style.background = `url(${state.settings.callBg}) center/cover, linear-gradient(145deg,#1a1a2e,#16213e)`;
+    document.getElementById('callCard').style.background = `url(${state.settings.callBg}) center/cover, radial-gradient(ellipse at 23% 16%,#766377 0%,#493e55 42%,#242433 100%)`;
   } else {
-    document.getElementById('callCard').style.background = 'linear-gradient(145deg,#1a1a2e,#16213e)';
+    document.getElementById('callCard').style.background = 'radial-gradient(ellipse at 23% 16%,#766377 0%,#493e55 42%,#242433 100%)';
   }
   
   document.getElementById('callOverlay').classList.add('active');
@@ -1580,9 +1581,9 @@ function expandCall() {
     <button class="call-btn hangup" onclick="hangupCall()">☎</button>
   `;
   if (state.settings.callBg) {
-    document.getElementById('callCard').style.background = `url(${state.settings.callBg}) center/cover, linear-gradient(145deg,#1a1a2e,#16213e)`;
+    document.getElementById('callCard').style.background = `url(${state.settings.callBg}) center/cover, radial-gradient(ellipse at 23% 16%,#766377 0%,#493e55 42%,#242433 100%)`;
   } else {
-    document.getElementById('callCard').style.background = 'linear-gradient(145deg,#1a1a2e,#16213e)';
+    document.getElementById('callCard').style.background = 'radial-gradient(ellipse at 23% 16%,#766377 0%,#493e55 42%,#242433 100%)';
   }
 }
 
@@ -2199,6 +2200,7 @@ if (isGroup && senderId) {
   if (notifyDream) notifyName = notifyDream.name;
 }
 sendNotification(notifyName, '发来一条消息');
+if (!isGroup) MindListen.offer(state.currentChatId);
 }
 
 // ===== AI 群主的管理行为 =====
@@ -2939,6 +2941,7 @@ function renderChatMessages(preserveScroll) {
 
     // 2. 系统消息（最高优先级）
         // 转发卡片
+    if (m.type === 'listenInvite') { html += MindListen.card(m,i); continue; }
     if (m.type === 'forward') {
       var fwClass = m.from === 'user' ? 'message user bubble bubble-user' : 'message dream bubble bubble-dream';
       html += '<div data-msg-index="' + i + '" style="display:flex;justify-content:' + (m.from === 'user' ? 'flex-end' : 'flex-start') + ';align-items:flex-end;gap:8px;margin-bottom:6px;">';
@@ -3345,6 +3348,7 @@ function openChat(id) {
   saveState();
   state.currentChatId = id;
   var isGroup = id && id.startsWith('group_');
+  document.getElementById('listen-chat').hidden = !!isGroup;
   
   if (isGroup) {
     var g = state.groups.find(function(item) { return item.id === id; });
@@ -4856,8 +4860,8 @@ function renderCallUI() {
   }
 
   var bg = state.settings && state.settings.callBg;
-  if (bg) card.style.background = 'url(' + bg + ') center/cover, linear-gradient(145deg,#1a1a2e,#16213e)';
-  else card.style.background = 'linear-gradient(145deg,#1a1a2e,#16213e)';
+  if (bg) card.style.background = 'url(' + bg + ') center/cover, radial-gradient(ellipse at 23% 16%,#766377 0%,#493e55 42%,#242433 100%)';
+  else card.style.background = 'radial-gradient(ellipse at 23% 16%,#766377 0%,#493e55 42%,#242433 100%)';
 
   overlay.classList.add('active');
 }
@@ -8761,12 +8765,12 @@ function checkAssistantExpiry() {
 }
 
 // ===== 音乐功能 · 本地导入 =====
-function renderMusicList() {
+function renderMusicList() { MindListen.draw();
   var container = document.getElementById('musicListContainer');
   if (!container) return;
   var songs = state.musicLibrary.songs || [];
   if (songs.length === 0) {
-    container.innerHTML = '<div style="padding:60px 20px;text-align:center;color:#86868b;font-size:14px;">还没有音乐，点右上角 + 导入吧</div>';
+    container.innerHTML = '<div style="padding:60px 20px;text-align:center;color:#86868b;font-size:14px;">在上方点歌即可加入曲库，也可以点右上角 + 导入自己的歌</div>';
     return;
   }
   var html = '';
@@ -8774,8 +8778,8 @@ function renderMusicList() {
     html += '<div onclick="playMusic(' + idx + ')" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;">';
     html += '<span style="font-size:13px;color:#86868b;width:20px;text-align:center;">' + (idx + 1) + '</span>';
     html += '<div style="flex:1;min-width:0;">';
-    html += '<div style="font-size:14px;font-weight:500;color:#1d1d1f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (song.title || song.fileName) + '</div>';
-    html += '<div style="font-size:12px;color:#86868b;margin-top:2px;">' + (song.artist || '未知艺术家') + '</div>';
+    html += '<div style="font-size:14px;font-weight:500;color:#1d1d1f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escapeHtml(song.title || song.fileName) + '</div>';
+    html += '<div style="font-size:12px;color:#86868b;margin-top:2px;">' + escapeHtml(song.artist || '未知艺术家') + '</div>';
     html += '</div>';
     html += '<span style="font-size:12px;color:#c7c7cc;">' + (song.duration ? formatMinSec(song.duration) : '--:--') + '</span>';
     html += '<span onclick="event.stopPropagation();deleteMusic(' + idx + ')" style="font-size:16px;color:#ff3b30;padding:6px 10px;cursor:pointer;user-select:none;">🗑</span>';
@@ -8865,8 +8869,9 @@ musicPlayer.addEventListener('loadedmetadata', function() {
   updateMusicBar();
 });
 musicPlayer.addEventListener('ended', function() {
-  nextMusic();
+  if (!MindListen.ended()) nextMusic();
 });
+musicPlayer.addEventListener('playing', ()=>MindListen.playing());
 musicPlayer.addEventListener('play', function() {
   var btn = document.getElementById('musicBarPlayBtn');
   if (btn) btn.textContent = '⏸';
@@ -8887,7 +8892,8 @@ setTimeout(function() {
 function playMusic(idx) {
   var songs = state.musicLibrary.songs || [];
   if (idx < 0 || idx >= songs.length) return;
-  currentMusicIndex = idx;
+  MindListen.newTrack(); currentMusicIndex = idx;
+  OnlineMusic.prepare(musicPlayer, songs[idx]);
   musicPlayer.src = songs[idx].dataUrl;
   // 立刻刷新一次，把歌名和时长填上
   updateMusicBar();
@@ -8896,7 +8902,8 @@ function playMusic(idx) {
   musicPlayer.play().then(function() {
     updateMusicBar();
   }).catch(function(e) {
-    showToast('播放失败：' + e.message);
+    if (songs[idx]?.onlineId && e.name === 'NotSupportedError') return;
+    if (e.name !== 'AbortError') showToast(e.name === 'NotAllowedError' ? '点一下播放，开始听歌' : '播放失败：' + e.message);
   });
 }
 

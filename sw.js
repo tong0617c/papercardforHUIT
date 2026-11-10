@@ -1,5 +1,5 @@
 // Mind Service Worker
-var CACHE_NAME = 'mind-v2-ledger-1';
+var CACHE_NAME = 'mind-private-online-2';
 var URLS_TO_CACHE = [
   './',
   './index.html',
@@ -20,7 +20,7 @@ var URLS_TO_CACHE = [
   './trace-start.js',
   './trace-notice.html',
   './reply-recovery.js?v=2',
-  './script.js?v=ledger1',
+  './listen-private.css?v=net2','./listen-private.js?v=net2','./online-music.js?v=net2','./script.js?v=net2',
   './icon-huit.png',
   './manifest.json'
 ];
@@ -43,7 +43,7 @@ self.addEventListener('activate', function(e) {
     caches.keys().then(function(names) {
       return Promise.all(
         names.map(function(n) {
-          if (n !== CACHE_NAME) return caches.delete(n);
+          if (n !== CACHE_NAME && n.startsWith('mind-private-')) return caches.delete(n);
         })
       );
     }).then(function() {
@@ -53,12 +53,13 @@ self.addEventListener('activate', function(e) {
 });
 
 self.addEventListener('fetch', function(e) {
+  if (e.request.headers.has('range')) return;
   if (e.request.method !== 'GET') return;
   var url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
 
   e.respondWith(
-    caches.match(e.request, { ignoreSearch: url.pathname.endsWith('/trace.html') }).then(function(cached) {
+    caches.open(CACHE_NAME).then(function(cache) { return cache.match(e.request, { ignoreSearch: url.pathname.endsWith('/trace.html') }); }).then(function(cached) {
       var fetchPromise = fetch(e.request).then(function(response) {
         if (response && response.status === 200 && response.type === 'basic') {
           var clone = response.clone();
